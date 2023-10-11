@@ -1,0 +1,46 @@
+b = 15; // binding rate of inducer to TetR::EGFP
+lk = 2; // TetR::EGFP basal transcriptional rate (leakage)
+m = 200; // TetR::EGFP max transcriptional rate
+mu = 3.5; // TetR::EGFP mRNA degradation
+p = 75/2; // TetR::EGFP translational rate (/2 due to TetR dimers)
+delta = 0.046; // TetR::EGFP degradation + dilution
+a = 3.7; // rate of transcription machinery assembling
+alpha = 0.28; // rate of transcription machinery disassembling
+rho = 20.8; // rate of TetR::EGFP unbinding from the promoter
+r = 0.2; // rate of TetR::EGFP binding to the promoter
+f = 0.9242; // rate of inducer entering the cells [0..infinity]
+c = 140; // effective inducer concentration constant modifier
+ // (increase it for cells which are easily penetrated)
+
+basal = 1;
+M = 0; // TetR::EGFP mRNA
+D = 0; // free TetR::EGFP (total TetR::EGFP will be D+H+B)
+H = 0; // 1 inducer-bound TetR::EGFP
+B = 0; // 2 inducer-bound TetR::EGFP
+
+ // Promoter states:
+R01 = 0; // one tetO2 site occupied (single repressed state)
+R02 = 1; // two tetO2 sites occupied (double repressed state)
+A = 0; // unrepressed state
+Aup = 1; // promoter state with transcription machinery present
+Aup0 = 0; // promoter state w/o transcription machinery (inactive)
+Ii = 0; // intracellular concentration of inducer
+Ie = 0; // extracellular concentration of inducer
+
+Iinflux, Ie->Ie+Ii, f*c;
+Ioutflux, Ii->, f;
+r3, Aup->Aup0, alpha;
+r4, Aup0->Aup, a;
+r5, Aup+A->Aup+A+M, m;
+r5_1, basal->basal+M, lk;
+r6, M->, mu;
+r7, M->M+D, p;
+r8, D->, delta;
+r9, D+Ii->H, 2*b;
+r10, H->, delta;
+r11, H+Ii->B, b;
+r12, B->, delta;
+s01, D+A->R01, r;
+s02, R01->D+A, rho; 
+s03, D+R01->R02, r;
+s04, R02->D+R01, rho; 
