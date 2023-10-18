@@ -1,7 +1,7 @@
 # Code-for-PNAS-Wan-et-al.-2023
-Code for the paper "Mechanisms and Countermeasures of Mammalian Drug Resistance Acquired During Long-Term Evolution" PNAS, 2023, Wan et al.
+Code for the paper "Adaptive DNA amplification of synthetic gene circuit opens new way to overcome cancer chemoresistance" PNAS, 2023, Wan et al.
 
-This repository contains the codes utilized in the manuscript "Mechanisms and Countermeasures of Mammalian Drug Resistance Acquired During Long-Term Evolution".
+This repository contains the codes utilized in the manuscript "Adaptive DNA amplification of synthetic gene circuit opens new way to overcome cancer chemoresistance".
 All MATLAB codes were run using R2022a, and all Dizzy codes were run using Java 8.0.361
 
 File descriptions:
@@ -29,6 +29,9 @@ dizzy2matlab2.m: This converts the reactions in the Dizzy script into the format
 
 createMobj.m: This converts the reactions from the Dizzy script into the format needed for MATLAB's simulator
 
+findTFO.m: This finds purine stretches in a DNA sequence, and measures the length of such stretches
+
 Zip Files:
 
 mNF-PuroR: This zip file contains .mat files for the gated flow data from the public data repository for Farquhar, K. S. et al "Role of network-mediated stochasticity in mammalian drug resistance". Please refer to this depository for more information: https://openwetware.org/wiki/CHIP:Data
+
